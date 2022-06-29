@@ -1,6 +1,6 @@
 const {
   getProductsAllModel,
-  getProductsIdModel
+  getProductsIdModel,
 } = require('../models/productsModel');
 
 const getProductsAllService = async () => {
@@ -8,15 +8,15 @@ const getProductsAllService = async () => {
   if (!products) return [];
 
   return products;
-}
+};
 
 const getProductIdService = async (id) => {
   const [product] = await getProductsIdModel(id);
-    if (!product) return [];
-    return product;
-}
+  if (!product) return [];
+  return product;
+};
 
 module.exports = {
   getProductsAllService,
   getProductIdService,
-}
+};

@@ -1,20 +1,21 @@
 const {
   getProductsAllService,
-  getProductIdService
+  getProductIdService,
 } = require('../services/productsService');
 
 const getProductsAllController = async (_req, res) => {
   try {
     const product = await getProductsAllService();
-    if (!product) res.status(402).json({
-      message: "Product not found"
-    });
+    if (!product) {
+      res.status(402).json({
+        message: 'Product not found',
+      });
+    }
     return res.status(200).json(product);
   } catch (err) {
     console.log(err);
   }
-  
-}
+};
 
 const getProductIdController = async (req, res) => {
   const { id } = req.params;
@@ -23,15 +24,14 @@ const getProductIdController = async (req, res) => {
     console.log(product);
     if (!product || product.length === 0) {
       return res.status(404).json({
-        message: "Product not found"
-      })
-    };
+        message: 'Product not found',
+      });
+    }
     return res.status(200).json(product);
   } catch (err) {
     console.log(err);
   }
-
-}
+};
 
 module.exports = {
   getProductsAllController,
