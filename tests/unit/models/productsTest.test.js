@@ -12,33 +12,30 @@ const {
 describe('testing the functions of getting products in the database', () => {
   describe('success case', () => {
 
-  before(async () => {
-    const products = [{
-      id: 1,
-      name: 'exemplo de produto'
-    }];
-    sinon.stub(connection, 'execute').returns(products);
-  });
+    before(async () => {
+      const products = [{
+        id: 1,
+        name: 'exemplo de produto'
+      }];
+      sinon.stub(connection, 'execute').returns(products);
+    });
 
-  after(async () => {
-    connection.execute.restore();
-  });
-  
-  it('return a object', async () => {
-    const response = await getProductsAllModel();
+    after(async () => {
+      connection.execute.restore();
+    });
 
-    expect(response).to.be.a('object')
-  });
-  
-  it('my object has name and id property', async () => {
-    const response = await getProductsAllModel();
+    it('return a object', async () => {
+      const response = await getProductsAllModel();
 
-    expect(response).to.have.a.property('name');
-    expect(response).to.have.a.property('id');
-  });
-  
-  })
-  describe('case of no success', () => {
+      expect(response).to.be.a('object')
+    });
 
-  })
+    it('my object has name and id property', async () => {
+      const response = await getProductsAllModel();
+
+      expect(response).to.have.a.property('name');
+      expect(response).to.have.a.property('id');
+    });
+
+  });
 })

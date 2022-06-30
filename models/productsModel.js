@@ -2,6 +2,7 @@ const connection = require('../helpers/connection');
 
 const getProductsAllModel = async () => {
   const [products] = await connection.execute('SELECT * FROM StoreManager.products');
+
   return products;
 };
 
