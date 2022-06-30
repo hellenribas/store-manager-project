@@ -3,7 +3,6 @@ const {
   getProductsIdModel,
   createProductModel,
 } = require('../models/productsModel');
-const { productValidate } = require('./productsValidate');
 
 const getProductsAllService = async () => {
   const products = await getProductsAllModel();
@@ -21,25 +20,17 @@ const getProductIdService = async (id) => {
 const createProductService = async (product) => {
   if (!product.name) {
     return {
-      error: {
-      
-        message: '"name" is required',
-      },
+      error: { message: '"name" is required' },
       status: 400,
-    }
+    };
   }
-
   if (product.name.length < 5) {
     return {
-      error: 
-      {
-      message: '"name" length must be at least 5 characters long'
-      }
-      ,
+      error:
+        { message: '"name" length must be at least 5 characters long' },
       status: 422,
-    }
+    };
   }
-
   const response = await createProductModel(product);
   return response;
 };
