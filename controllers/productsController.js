@@ -35,14 +35,14 @@ const getProductIdController = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-    try {
-      const product = req.body;
-      const result = await createProductService(product);
-        res.status(201).json(result);
-    } catch (err) {
-      console.error(err);
-    }
-}
+  try {
+    const product = req.body;
+    const result = await createProductService(product);
+    res.status(201).json(result);
+  } catch (err) {
+    console.error(err);
+  }
+};
  
 module.exports = {
   getProductsAllController,

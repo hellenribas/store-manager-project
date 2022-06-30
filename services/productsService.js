@@ -20,7 +20,7 @@ const getProductIdService = async (id) => {
 const createProductService = async (product) => {
   const response = await createProductModel(product);
   return response;
-}
+};
 
 module.exports = {
   getProductsAllService,
