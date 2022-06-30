@@ -35,8 +35,13 @@ const createProductService = async (product) => {
   return response;
 };
 
+// const insertSalesService = async (products) => {
+//   await products;
+// }
+
 module.exports = {
   getProductsAllService,
   getProductIdService,
   createProductService,
+  // insertSalesService,
 };
