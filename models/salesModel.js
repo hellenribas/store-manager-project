@@ -10,7 +10,6 @@ const salesDate = async () => {
 };
 
 const insertSalesModel = async (salesId, productId, quantity) => {
-  console.log(salesId, productId, quantity);
   const [product] = await connection.execute(
     'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
     [salesId, productId, quantity],
