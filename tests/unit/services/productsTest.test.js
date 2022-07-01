@@ -72,3 +72,33 @@ describe("testing product by id in database", () => {
 
   });
 });
+
+describe("testing validate", () => {
+  describe('success case', () => {
+
+    before(() => {
+      const result = {
+        id: 1,
+        name: 'Martelo do Thor',
+      };
+
+      sinon.stub(productsModel, 'createProductModel').resolves(result);
+    });
+
+    after(() => {
+      productsModel.createProductModel.restore();
+    });
+
+    it('return a object', async () => {
+      const response = await productsService.getProductIdService(1);
+      expect(response).to.be.an('object');
+    });
+
+    it('return a property id', async () => {
+      const response = await productsService.getProductIdService(1);
+
+      expect(response).to.have.a.property('id');
+    });
+
+  });
+});

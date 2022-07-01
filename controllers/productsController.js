@@ -22,7 +22,6 @@ const getProductIdController = async (req, res) => {
   const { id } = req.params;
   try {
     const product = await getProductIdService(id);
-    console.log(product);
     if (!product || product.length === 0) {
       return res.status(404).json({
         message: 'Product not found',
