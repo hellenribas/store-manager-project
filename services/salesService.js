@@ -1,6 +1,8 @@
 const {
   insertSalesModel,
   salesDate,
+  getSalesModel,
+  getSaleIdModel,
 } = require('../models/salesModel');
 
 const {
@@ -61,6 +63,20 @@ const insertSalesService = async (products) => {
   return { id: saleId, itemsSold: [...products] };
 };
 
+const getSalesService = async () => {
+  const sales = await getSalesModel();
+  if (!sales) return [];
+  return sales;
+}
+
+const getSaleIdService = async (id) => {
+  const result = await getSaleIdModel(id);
+  if (!result) return [];
+  return result;
+}
+
 module.exports = {
   insertSalesService,
+  getSalesService,
+  getSaleIdService,
 };

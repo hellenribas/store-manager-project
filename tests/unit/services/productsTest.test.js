@@ -33,10 +33,9 @@ describe("testing the functions of getting products in services' file", () => {
       expect(response).to.be.an('array');
     });
 
-    it('return a object', async () => {
+    it('return length', async () => {
       const response = await productsService.getProductsAllService();
-
-      expect(response.length).not.to.be.equal(0);
+      expect(response.length > 0).to.be.equal(true);
     });
 
   });
@@ -66,7 +65,6 @@ describe("testing product by id in database", () => {
 
     it('return a object', async () => {
       const response = await productsService.getProductIdService(1);
-
       expect(response.length).not.to.be.equal(0);
     });
 
@@ -74,7 +72,7 @@ describe("testing product by id in database", () => {
 });
 
 describe("testing validate", () => {
-  describe('success case', () => {
+  describe('success case create product', () => {
 
     before(() => {
       const result = {
