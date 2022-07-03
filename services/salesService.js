@@ -67,13 +67,13 @@ const getSalesService = async () => {
   const sales = await getSalesModel();
   if (!sales) return [];
   return sales;
-}
+};
 
 const getSaleIdService = async (id) => {
   const result = await getSaleIdModel(id);
   if (!result) return [];
   return result;
-}
+};
 
 module.exports = {
   insertSalesService,
