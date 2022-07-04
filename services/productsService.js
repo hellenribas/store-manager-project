@@ -17,7 +17,7 @@ const createProductService = async (product) => {
   if (!product.name) {
     return {
       error: {
-        message: '"name" is required'
+        message: '"name" is required',
       },
       status: 400,
     };
@@ -25,7 +25,7 @@ const createProductService = async (product) => {
   if (product.name.length < 5) {
     return {
       error: {
-        message: '"name" length must be at least 5 characters long'
+        message: '"name" length must be at least 5 characters long',
       },
       status: 422,
     };
@@ -35,26 +35,15 @@ const createProductService = async (product) => {
 };
 
 const updateService = async (id, product) => {
-
   if (!product.name) {
-    return {
-      error: {
-        message: '"name" is required'
-      },
-      status: 400,
-    };
+    return { error: { message: '"name" is required' }, status: 400 };
   }
   if (product.name.length < 5) {
-    return {
-      error: {
-        message: '"name" length must be at least 5 characters long'
-      },
-      status: 422,
-    };
+    return { error: { message: '"name" length must be at least 5 characters long' }, status: 422 };
   }
 
   const {
-    name
+    name,
   } = product;
 
   const response = await productModel.updateModel(id, name);
@@ -63,8 +52,8 @@ const updateService = async (id, product) => {
   return {
     id: response.id,
     name: response.product_name,
-  };;
-}
+  };
+};
 
 module.exports = {
   getProductsAllService,

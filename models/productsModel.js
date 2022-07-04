@@ -34,7 +34,7 @@ const updateModel = async (id, name) => {
     .execute('UPDATE StoreManager.products SET name=? WHERE id=?',
       [name, id]);
   const [
-    [product]
+    [product],
   ] = await connection
     .execute('SELECT id, name product_name FROM StoreManager.products WHERE id = ?',
       [id]);

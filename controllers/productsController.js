@@ -60,7 +60,7 @@ const updateController = async (req, res) => {
   } catch (err) {
     console.error(err);
   }
-}
+};
  
 module.exports = {
   getProductsAllController,
