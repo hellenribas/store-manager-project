@@ -12,13 +12,13 @@ describe("testing the functions of getting products in services' file", () => {
 
     before(() => {
       const products = [{
-        id: 1,
-        name: 'Martelo de Thor'
-      },
-      {
-        id: 2,
-        name: 'Traje de encolhimento'
-      },
+          id: 1,
+          name: 'Martelo de Thor'
+        },
+        {
+          id: 2,
+          name: 'Traje de encolhimento'
+        },
       ];
 
       sinon.stub(productsModel, 'getProductsAllModel').resolves(products);
@@ -39,6 +39,22 @@ describe("testing the functions of getting products in services' file", () => {
     });
 
   });
+  describe('not sucess getAllServices', () => {
+    before(() => {
+      let notProduct = [];
+
+      sinon.stub(productsModel, 'getProductsAllModel').resolves(notProduct);
+    });
+
+    after(() => {
+      productsModel.getProductsAllModel.restore();
+    });
+
+    it('return array.length equal 0', async () => {
+      const response = await productsService.getProductsAllService();
+      expect(response.length === 0).to.be.equal(true);
+    });
+  })
 });
 
 describe("testing product by id in database", () => {
@@ -46,10 +62,9 @@ describe("testing product by id in database", () => {
 
     before(() => {
       const product = [{
-          id: 1,
-          name: 'Martelo de Thor',
-        },
-       ];
+        id: 1,
+        name: 'Martelo de Thor',
+      }, ];
 
       sinon.stub(productsModel, 'getProductsIdModel').resolves(product);
     });
@@ -74,11 +89,22 @@ describe("testing product by id in database", () => {
 describe("testing validate", () => {
   describe('success case create product', () => {
 
+    const result = {
+      id: 1,
+      name: 'Martelo do Thor',
+    };
+
+    const notName = {
+      id: 1,
+      name: '',
+    };
+
+    const invalidName = {
+      id: 1,
+      name: 'pro',
+    }
+
     before(() => {
-      const result = {
-        id: 1,
-        name: 'Martelo do Thor',
-      };
 
       sinon.stub(productsModel, 'createProductModel').resolves(result);
     });
@@ -88,14 +114,27 @@ describe("testing validate", () => {
     });
 
     it('return a object', async () => {
-      const response = await productsService.getProductIdService(1);
+      const response = await productsService.createProductService(result);
+
       expect(response).to.be.an('object');
     });
 
     it('return a property id', async () => {
-      const response = await productsService.getProductIdService(1);
+      const response = await productsService.createProductService(result);
 
       expect(response).to.have.a.property('id');
+    });
+
+    it('Not return a property name', async () => {
+      const response = await productsService.createProductService(notName);
+
+      expect(response.status).to.be.equal(400);
+    });
+
+    it('Not return a property name', async () => {
+      const response = await productsService.createProductService(invalidName);
+
+      expect(response.status).to.be.equal(422);
     });
 
   });
