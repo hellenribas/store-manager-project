@@ -16,7 +16,9 @@ const getProductsAllController = async (_req, res) => {
 
 const getProductIdController = async (req, res) => {
   try {
-    const { id } = req.params;
+    const {
+      id,
+    } = req.params;
     const product = await productService.getProductIdService(id);
     if (!product || product.length === 0) {
       return res.status(404).json({
@@ -36,7 +38,7 @@ const createProduct = async (req, res) => {
     if (result.status) {
       return res.status(result.status).json(result.error);
     }
-      return res.status(201).json(result);
+    return res.status(201).json(result);
   } catch (err) {
     console.error(err);
   }
@@ -44,7 +46,9 @@ const createProduct = async (req, res) => {
 
 const updateController = async (req, res) => {
   try {
-    const { id } = req.params;
+    const {
+      id,
+    } = req.params;
     const product = req.body;
     const result = await productService.updateService(id, product);
 
@@ -61,10 +65,29 @@ const updateController = async (req, res) => {
     console.error(err);
   }
 };
- 
+
+const deleteController = async (req, res) => {
+  try {
+    const {
+      id,
+    } = req.params;
+    const result = await productService.deleteService(id);
+
+    if (!result || result.length === 0) {
+      return res.status(404).json({
+        message: 'Product not found',
+      });
+    }
+    return res.status(204).end();
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 module.exports = {
   getProductsAllController,
   getProductIdController,
   createProduct,
   updateController,
+  deleteController,
 };

@@ -55,9 +55,17 @@ const updateService = async (id, product) => {
   };
 };
 
+const deleteService = async (id) => {
+  const idProduct = await productModel.deleteModel(id);
+  if (!id) return [];
+
+  return idProduct;
+};
+
 module.exports = {
   getProductsAllService,
   getProductIdService,
   createProductService,
   updateService,
+  deleteService,
 };
