@@ -44,7 +44,7 @@ describe("testing the functions of getting products in services' file", () => {
   });
   describe('not sucess getAllServices', () => {
     before(() => {
-      let notProduct = [];
+      const notProduct = undefined;
 
       sinon.stub(productsModel, 'getProductsAllModel').resolves(notProduct);
     });
@@ -87,6 +87,23 @@ describe("testing product by id in database", () => {
     });
 
   });
+  describe('not success product id case', () => {
+    const ID = 999;
+    before(() => {
+      const productArray = [undefined];
+
+      sinon.stub(productsModel, 'getProductsIdModel').resolves(productArray);
+    });
+
+    after(() => {
+      productsModel.getProductsIdModel.restore();
+    });
+
+    it('return array.length equal 0', async () => {
+      const response = await productsService.getProductIdService(ID);
+      expect(response.length === 0).to.be.equal(true);
+    });
+  })
 });
 
 describe("testing validate", () => {
@@ -216,7 +233,7 @@ describe('testing function delete product', () => {
     name: 'Martelo'
   }];
   const ID = 1;
-  describe('sucess case', () => {
+  describe('sucess delete case', () => {
     before(() => {
 
       sinon.stub(productsModel, 'deleteModel').resolves(productRemoved);
@@ -228,7 +245,22 @@ describe('testing function delete product', () => {
 
     it('return a length greater than 0', async () => {
       const product = await productsService.deleteService(ID);
-      expect(product.length > 0).to.be.equal(true)
-    })
-  })
-})
+      expect(product.length > 0).to.be.equal(true);
+    });
+  });
+  describe('not success delete case', () => {
+    const ID = undefined;
+    before(() => {
+
+      sinon.stub(productsModel, 'deleteModel').resolves([]);
+    });
+
+    after(() => {
+      productsModel.deleteModel.restore();
+    });
+    it('invalid id', async () => {
+      const product = await productsService.deleteService(ID);
+      expect(product.length).to.be.equal(0);
+    });
+  });
+});

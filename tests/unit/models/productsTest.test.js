@@ -89,3 +89,48 @@ describe('testing insert product', () => {
   })
 });
 
+describe('testing update product', () => {
+  const NAME = 'produto 1'
+  const ID = 1;
+  const product = [
+    [{
+      id: 1,
+      product_name: 'Produto 1'
+    }]
+  ];
+
+  it('return is object', async () => {
+    sinon.stub(connection, 'execute').returns(product);
+    const result = await productsModel.updateModel(ID, NAME);
+    expect(typeof result).to.be.equal('object');
+    expect(result).have.property('id');
+    expect(result).have.property('product_name');
+    connection.execute.restore();
+  })
+});
+
+describe('testing delete product', () => {
+  const ID = 1;
+  const product = [{
+    id: 1,
+    name: 'Produto 1'
+  }];
+  before(() => {
+    sinon.stub(connection, 'execute').returns(product);
+  });
+
+  after(() => {
+    connection.execute.restore();
+  });
+  it('return is object', async () => {
+    const result = await productsModel.deleteModel(ID);
+    console.log(result);
+    expect(result).to.be.an('object');
+    expect(result).have.property('id');
+    expect(result).have.property('name');
+
+  })
+});
+
+
+

@@ -35,7 +35,6 @@ const createProduct = async (req, res) => {
   try {
     const product = req.body;
     const result = await productService.createProductService(product);
-    console.log(product);
     if (result.status) {
       return res.status(result.status).json(result.error);
     }
