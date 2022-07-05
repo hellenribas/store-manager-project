@@ -4,7 +4,7 @@ const getProductsAllController = async (_req, res) => {
   try {
     const product = await productService.getProductsAllService();
     if (!product) {
-      res.status(402).json({
+      return res.status(402).json({
         message: 'Product not found',
       });
     }
@@ -35,6 +35,7 @@ const createProduct = async (req, res) => {
   try {
     const product = req.body;
     const result = await productService.createProductService(product);
+    console.log(product);
     if (result.status) {
       return res.status(result.status).json(result.error);
     }

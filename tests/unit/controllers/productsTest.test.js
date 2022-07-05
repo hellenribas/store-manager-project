@@ -11,16 +11,16 @@ describe("testing the functions of getting products in controller' file", () => 
   describe('success case', () => {
     const res = {};
     const req = {};
-  
-        const products = [{
-            id: 1,
-            name: 'Martelo de Thor'
-          },
-          {
-            id: 2,
-            name: 'Traje de encolhimento'
-          },
-        ];
+
+    const products = [{
+        id: 1,
+        name: 'Martelo de Thor'
+      },
+      {
+        id: 2,
+        name: 'Traje de encolhimento'
+      },
+    ];
 
     before(() => {
       res.status = sinon.stub().returns(res);
@@ -48,9 +48,9 @@ describe("testing the functions of getting products with id", () => {
     const ID = 1;
 
     const products = [{
-        id: 1,
-        name: 'Martelo de Thor'
-      }];
+      id: 1,
+      name: 'Martelo de Thor'
+    }];
 
     before(() => {
       res.status = sinon.stub().returns(res);
@@ -69,4 +69,35 @@ describe("testing the functions of getting products with id", () => {
       expect(res.status.calledWith(200)).to.be.equal(true);
     });
   });
+})
+
+describe('testing insert product', () => {
+  const res = {};
+  const req = {};
+  const ID = 1;
+  const result = {
+    id: 4,
+    name: 'ProdutoNovo'
+  };
+  const product = {
+    name: 'Produto1'
+  };
+  describe('success case insert product', () => {
+    before(() => {
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(product);
+      req.params = sinon.stub().returns(ID);
+
+      sinon.stub(productsService, 'createProductService').resolves(result);
+    });
+
+    after(() => {
+      productsService.createProductService.restore();
+    });
+
+    it('return status 201', async () => {
+      await productsController.createProduct(req, res);
+      expect(res.status.calledWith(201)).to.be.equal(true);
+    })
+  })
 })

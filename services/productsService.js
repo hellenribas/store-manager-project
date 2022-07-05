@@ -47,8 +47,9 @@ const updateService = async (id, product) => {
   } = product;
 
   const response = await productModel.updateModel(id, name);
-  if (!response) return [];
+  console.log(response);
 
+  if (!response) return [];
   return {
     id: response.id,
     name: response.product_name,
