@@ -156,35 +156,37 @@ describe('testing update', () => {
     after(() => {
       productsModel.updateModel.restore();
     });
-  })
 
-  const product = {
-    "name": "produto 1",
-  };
+    const product = {
+      "name": "produto 1",
+    };
 
-  const notName = {
-    "name": "",
-  };
-  const ID = 1;
-  const invalidName = {
-    name: 'pro',
-  }
+    const notName = {
+      "name": "",
+    };
+    const ID = 1;
+    const invalidName = {
+      name: 'pro',
+    }
 
-  it('Not return a property name', async () => {
-    const response = await productsService.updateService(ID, notName);
+    it('result is a object', async () => {
+      const returnProduct = await productsService.updateService(ID, product);
+      expect(typeof returnProduct).to.be.equal('object');
+      expect(returnProduct).to.have.property('id');
+      expect(returnProduct).to.have.property('name');
+    });
 
-    expect(response.status).to.be.equal(400);
-  });
+    it('Not return a property name', async () => {
+      const response = await productsService.updateService(ID, notName);
 
-  it('Not return a property name.length', async () => {
-    const response = await productsService.updateService(ID, invalidName);
+      expect(response.status).to.be.equal(400);
+    });
 
-    expect(response.status).to.be.equal(422);
-  });
+    it('Not return a property name.length', async () => {
+      const response = await productsService.updateService(ID, invalidName);
 
-  it('result is a object', async () => {
-    const returnProduct = await productsService.updateService(ID, product);
-    expect(typeof returnProduct).to.be.equal('object');
+      expect(response.status).to.be.equal(422);
+    });
   });
 });
 
