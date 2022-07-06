@@ -11,7 +11,6 @@ const productValidate = async (products, functions) => {
   }
   return [];
 };
-
 const validateSales = async (products) => {
   if (products.some((product) => !product.productId)) {
     return {
