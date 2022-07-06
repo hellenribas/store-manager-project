@@ -1,16 +1,16 @@
-// const {
-//   expect
-// } = require('chai');
+const {
+  expect
+} = require('chai');
 
-// const sinon = require('sinon');
+const sinon = require('sinon');
 
-// const salesService = require('../../../services/salesService');
+const salesService = require('../../../services/salesService');
 
-// const productModel = require('../../../models/productsModel');
+const productModel = require('../../../models/productsModel');
 
-// const salesModel = require('../../../models/salesModel');
+const salesModel = require('../../../models/salesModel');
 
-// const middlewares = require('../../../services/middlewareValidate');
+const middlewares = require('../../../services/middlewareValidate');
 
 // describe('testing productValidate', () => {
 //   describe('sucess insert case', () => {
@@ -43,12 +43,9 @@
 //     });
 
 //     after(() => {
-//       middlewares.productValidate.restore();
-//       middlewares.validateSales.restore();
-//       salesModel.insertSalesModel.restore();
-//       salesModel.salesDate.restore();
-//       productModel.getProductsAllModel.restore();
+//       sinon.restore();
 //     });
+  
 //     it('return a object', async () => {
 //       const result = await salesService.insertSalesService(product);
 //       expect(result).to.be.an('object');
@@ -93,51 +90,51 @@
 //    });
 // });
 
-// describe('testing getSalesService', () => {
-//   const product = [{
-//     date: '2022-07-06T19:16:31.000Z',
-//     id: 1,
-//     productId: 2,
-//     quantity: 7,
-//     saleId: 1
-//   }];
+describe('testing getSalesService', () => {
+  const product = [{
+    date: '2022-07-06T19:16:31.000Z',
+    id: 1,
+    productId: 2,
+    quantity: 7,
+    saleId: 1
+  }];
 
-//   before(() => {
+  before(() => {
 
-//     sinon.stub(salesModel, 'getSalesModel').resolves(product);
-//   });
+    sinon.stub(salesModel, 'getSalesModel').resolves(product);
+  });
 
-//   after(() => {
-//     salesModel.getSalesModel.restore();
-//   });
+  after(() => {
+    salesModel.getSalesModel.restore();
+  });
   
-//   it('return a array', async () => {
-//     const response = await salesService.getSalesService();
-//     expect(response.length > 0).to.be.equal(true);
-//   });
-// });
+  it('return a array', async () => {
+    const response = await salesService.getSalesService();
+    expect(response.length > 0).to.be.equal(true);
+  });
+});
 
-// describe('testing getSaleIdService', () => {
-//   const product = [{
-//     date: '2022-07-06T19:16:31.000Z',
-//     id: 1,
-//     productId: 2,
-//     quantity: 7,
-//     saleId: 1
-//   }];
+describe('testing getSaleIdService', () => {
+  const product = [{
+    date: '2022-07-06T19:16:31.000Z',
+    id: 1,
+    productId: 2,
+    quantity: 7,
+    saleId: 1
+  }];
 
-//   const ID = 1;
-//   before(() => {
+  const ID = 1;
+  before(() => {
 
-//     sinon.stub(salesModel, 'getSaleIdModel').resolves(product);
-//   });
+    sinon.stub(salesModel, 'getSaleIdModel').resolves(product);
+  });
 
-//   after(() => {
-//     salesModel.getSaleIdModel.restore();
-//   });
+  after(() => {
+    salesModel.getSaleIdModel.restore();
+  });
 
-//   it('return a array', async () => {
-//     const response = await salesService.getSaleIdService(ID);
-//     expect(response.length > 0).to.be.equal(true);
-//   });
-// });
+  it('return a array', async () => {
+    const response = await salesService.getSaleIdService(ID);
+    expect(response.length > 0).to.be.equal(true);
+  });
+});
