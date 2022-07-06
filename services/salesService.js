@@ -1,5 +1,4 @@
 const salesModel = require('../models/salesModel');
-const productModel = require('../models/productsModel');
 const middlewares = require('./middlewareValidate');
 
 const insertSalesService = async (products) => {
