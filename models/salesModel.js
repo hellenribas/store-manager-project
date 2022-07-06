@@ -67,5 +67,5 @@ module.exports = {
   salesDate,
   getSalesModel,
   getSaleIdModel,
-  convertFormat
+  convertFormat,
 };

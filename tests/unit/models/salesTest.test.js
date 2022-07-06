@@ -10,7 +10,7 @@ const salesModel = require('../../../models/salesModel');
 describe('testing salesDate', () => {
   describe('success insert case', () => {
     const sale = [{
-      insertId: 1,
+      insertId: 100,
     }]
     before(() => {
       sinon.stub(connection, 'execute').returns(sale);
