@@ -44,7 +44,8 @@ const getSalesModel = async () => {
     INNER JOIN StoreManager.sales AS sales
     ON product.sale_id = sales.id
     ORDER BY sale_id ASC, product_id ASC;`,
-    );
+  );
+
   return convertFormat(sales, true);
 };
 
@@ -66,4 +67,5 @@ module.exports = {
   salesDate,
   getSalesModel,
   getSaleIdModel,
+  convertFormat
 };
