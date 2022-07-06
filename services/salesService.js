@@ -3,9 +3,8 @@ const productModel = require('../models/productsModel');
 const middlewares = require('./middlewareValidate');
 
 const insertSalesService = async (products) => {
-  const func = productModel.getProductsAllModel();
   const validate = await middlewares.validateSales(products);
-  const getProducts = await middlewares.productValidate(products, func);
+  const getProducts = await middlewares.productValidate(products);
 
   if (validate.error) return validate;
 

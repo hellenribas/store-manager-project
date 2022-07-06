@@ -1,5 +1,7 @@
-const productValidate = async (products, functions) => {
-  const getProduct = await functions;
+const productModel = require('../models/productsModel');
+
+const productValidate = async (products) => {
+  const getProduct = await productModel.getProductsAllModel();;
   const ids = getProduct.map((elem) => elem.id);
   if (products.some((el) => !ids.includes(el.productId))) {
     return {
