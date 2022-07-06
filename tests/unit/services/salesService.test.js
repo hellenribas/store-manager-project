@@ -6,11 +6,11 @@ const sinon = require('sinon');
 
 const salesService = require('../../../services/salesService');
 
-const productModel = require('../../../models/productsModel');
+// const productModel = require('../../../models/productsModel');
 
 const salesModel = require('../../../models/salesModel');
 
-const middlewares = require('../../../services/middlewareValidate');
+// const middlewares = require('../../../services/middlewareValidate');
 
 // describe('testing productValidate', () => {
 //   describe('sucess insert case', () => {
