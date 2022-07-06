@@ -1,13 +1,6 @@
-const {
-  insertSalesModel,
-  salesDate,
-  getSalesModel,
-  getSaleIdModel,
-} = require('../models/salesModel');
+const salesModel = require('../models/salesModel');
 
-const {
-  getProductsAllModel,
-} = require('../models/productsModel');
+const productModel = require('../models/productsModel');
 
 const validateSales = async (products) => {
   if (products.some((product) => !product.productId)) {
@@ -31,7 +24,7 @@ const validateSales = async (products) => {
 };
 
 const productValidate = async (products) => {
-  const getProduct = await getProductsAllModel();
+  const getProduct = await productModel.getProductsAllModel();
   const ids = getProduct.map((elem) => elem.id);
   if (products.some((el) => !ids.includes(el.productId))) {
     return {
@@ -54,23 +47,23 @@ const insertSalesService = async (products) => {
 
   const {
     saleId,
-  } = await salesDate();
+  } = await salesModel.salesDate();
 
   await Promise
     .all(products
-      .map(({ productId, quantity }) => insertSalesModel(saleId, productId, quantity)));
+      .map(({ productId, quantity }) => salesModel.insertSalesModel(saleId, productId, quantity)));
 
   return { id: saleId, itemsSold: [...products] };
 };
 
 const getSalesService = async () => {
-  const sales = await getSalesModel();
+  const sales = await salesModel.getSalesModel();
   if (!sales) return [];
   return sales;
 };
 
 const getSaleIdService = async (id) => {
-  const result = await getSaleIdModel(id);
+  const result = await salesModel.getSaleIdModel(id);
   if (!result) return [];
   return result;
 };
@@ -79,4 +72,6 @@ module.exports = {
   insertSalesService,
   getSalesService,
   getSaleIdService,
+  validateSales,
+  productValidate,
 };

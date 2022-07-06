@@ -1,9 +1,6 @@
 const {
   expect
 } = require('chai');
-const {
-  array
-} = require('joi');
 
 const sinon = require('sinon');
 
